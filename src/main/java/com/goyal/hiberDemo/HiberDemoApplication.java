@@ -2,6 +2,8 @@ package com.goyal.hiberDemo;
 
 import com.goyal.hiberDemo.entity.Student;
 import com.goyal.hiberDemo.repository.StudentRepository;
+import com.goyal.hiberDemo.service.InstructorService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +17,9 @@ public class HiberDemoApplication implements CommandLineRunner {
 
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private InstructorService instructorService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HiberDemoApplication.class, args);
@@ -22,15 +27,9 @@ public class HiberDemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		 Student student1 = new Student("Kushal", "Goyal", "test@test.com");
-//		 Student student2 = new Student("Palash", "Goyal", "test@test.com");
-//		 Student student3 = new Student("Arpit", "Goyal", "test@test.com");
-//		 studentRepository.save(student1);
-//		 studentRepository.save(student2);
-//		 studentRepository.save(student3);
-
 		Optional<Student> student = studentRepository.findById(1);
-		studentRepository.delete(student.get());
 		System.out.println(student);
+		
+		instructorService.createInstructor();
 	}
 }
