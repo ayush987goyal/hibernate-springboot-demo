@@ -30,6 +30,6 @@ public class HiberDemoApplication implements CommandLineRunner {
 		Optional<Student> student = studentRepository.findById(1);
 		System.out.println(student);
 		
-		instructorService.createInstructor();
+		instructorService.getDetails();
 	}
 }

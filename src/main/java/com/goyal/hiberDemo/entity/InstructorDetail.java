@@ -1,9 +1,11 @@
 package com.goyal.hiberDemo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +19,9 @@ public class InstructorDetail {
 	private String youtubeChannel;
 	private String hobby;
 
+	@OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+	private Instructor instructor;
+
 	public InstructorDetail() {
 	}
 
@@ -26,9 +31,18 @@ public class InstructorDetail {
 		this.hobby = hobby;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "InstructorDetail [id=" + id + ", youtubeChannel=" + youtubeChannel + ", hobby=" + hobby + "]";
+	}
+
+	public Instructor getInstructor() {
+		return instructor;
+	}
+
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
 	}
 
 	public int getId() {
