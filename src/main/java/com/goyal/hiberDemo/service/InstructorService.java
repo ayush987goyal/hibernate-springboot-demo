@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.goyal.hiberDemo.entity.Course;
 import com.goyal.hiberDemo.entity.Instructor;
 import com.goyal.hiberDemo.entity.InstructorDetail;
+import com.goyal.hiberDemo.entity.Review;
 import com.goyal.hiberDemo.repository.CourseRepository;
 import com.goyal.hiberDemo.repository.InstructorDetailRepository;
 import com.goyal.hiberDemo.repository.InstructorRepository;
@@ -77,5 +78,15 @@ public class InstructorService {
 		Optional<Instructor> instructor = instructorRepository.findById(1);
 		System.out.println("MYOUTPUT: " + instructor.get());
 		System.out.println("MYOUTPUT: " + instructor.get().getCourses());
+	}
+
+	@Transactional
+	public void createReviews() {
+		Optional<Course> course = courseRepository.findById(4);
+		course.get().addReview(new Review("Nice course"));
+		course.get().addReview(new Review("okayish course"));
+		System.out.println(course.get());
+		System.out.println(course.get().getReviews());
+		courseRepository.save(course.get());
 	}
 }

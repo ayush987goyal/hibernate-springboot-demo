@@ -19,6 +19,6 @@ public class HiberDemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		instructorService.eagerLazyDemo();
+		instructorService.createReviews();
 	}
 }
