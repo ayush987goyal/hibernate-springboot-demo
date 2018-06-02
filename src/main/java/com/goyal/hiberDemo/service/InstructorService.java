@@ -60,15 +60,22 @@ public class InstructorService {
 
 		System.out.println(instructor);
 	}
-	
+
 	@Transactional
 	public void getInstructorCourses() {
 		Optional<Instructor> instructor = instructorRepository.findById(1);
-		System.out.println(instructor.get().getCourses())	;
+		System.out.println(instructor.get().getCourses());
 	}
-	
+
 	public void deleteCourse() {
 		Optional<Course> course = courseRepository.findById(3);
 		courseRepository.delete(course.get());
+	}
+
+	@Transactional
+	public void eagerLazyDemo() {
+		Optional<Instructor> instructor = instructorRepository.findById(1);
+		System.out.println("MYOUTPUT: " + instructor.get());
+		System.out.println("MYOUTPUT: " + instructor.get().getCourses());
 	}
 }
