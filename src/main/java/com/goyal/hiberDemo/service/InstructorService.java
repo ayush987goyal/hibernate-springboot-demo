@@ -11,9 +11,11 @@ import com.goyal.hiberDemo.entity.Course;
 import com.goyal.hiberDemo.entity.Instructor;
 import com.goyal.hiberDemo.entity.InstructorDetail;
 import com.goyal.hiberDemo.entity.Review;
+import com.goyal.hiberDemo.entity.Student;
 import com.goyal.hiberDemo.repository.CourseRepository;
 import com.goyal.hiberDemo.repository.InstructorDetailRepository;
 import com.goyal.hiberDemo.repository.InstructorRepository;
+import com.goyal.hiberDemo.repository.StudentRepository;
 
 @Service
 public class InstructorService {
@@ -26,6 +28,9 @@ public class InstructorService {
 
 	@Autowired
 	private CourseRepository courseRepository;
+
+	@Autowired
+	private StudentRepository studentRepository;
 
 	public void createInstructor() {
 		Instructor instructor = new Instructor("Kushal", "Goyal", "test@test.com");
@@ -88,5 +93,36 @@ public class InstructorService {
 		System.out.println(course.get());
 		System.out.println(course.get().getReviews());
 		courseRepository.save(course.get());
+	}
+
+	@Transactional
+	public void addStudentsToCourse() {
+		Optional<Course> course = courseRepository.findById(4);
+		Student student1 = new Student("Ayush", "Goyal", "test@test.com");
+		Student student2 = new Student("Kushal", "Goyal", "test@test.com");
+
+		course.get().addStudent(student1);
+		course.get().addStudent(student2);
+
+		courseRepository.save(course.get());
+	}
+
+	@Transactional
+	public void addCoursesToStudent() {
+		Optional<Student> student = studentRepository.findById(7);
+		Course course1 = new Course("Java Spring");
+		Course course2 = new Course("NodeJS");
+
+		course1.addStudent(student.get());
+		course2.addStudent(student.get());
+		courseRepository.save(course1);
+		courseRepository.save(course2);
+	}
+
+	@Transactional
+	public void getCoursesForStudent() {
+		Optional<Student> student = studentRepository.findById(7);
+		System.out.println("MYOUTPUT: " + student.get());
+		System.out.println("MYOUTPUT: " + student.get().getCourses());
 	}
 }
