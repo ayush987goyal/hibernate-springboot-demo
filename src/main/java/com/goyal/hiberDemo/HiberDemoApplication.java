@@ -27,9 +27,6 @@ public class HiberDemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Optional<Student> student = studentRepository.findById(1);
-		System.out.println(student);
-		
-		instructorService.getDetails();
+		instructorService.deleteCourse();
 	}
 }
